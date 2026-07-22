@@ -1,14 +1,1 @@
-{
-    "WQS888": {
-        "placa": "WQS888",
-        "tipo": "carro",
-        "modelo": "4015",
-        "disponible": true
-    },
-    "0": {
-        "placa": "0",
-        "tipo": "00",
-        "modelo": "0",
-        "disponible": true
-    }
-}
+{}
