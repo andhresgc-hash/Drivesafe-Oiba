@@ -1,1 +1,10 @@
-{}
+{
+    "estudiantes": {
+        "54": {
+            "nombre": "polopolo",
+            "cedula": 54,
+            "edad": 54,
+            "detalle": "moto"
+        }
+    }
+}
