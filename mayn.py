@@ -4,7 +4,6 @@ from citas import (
     obtener_instructores, 
     obtener_vehiculos, 
     programar_cita, 
-    obtener_citas_instructor,
     obtener_citas_pendientes_estudiante, 
     obtener_historial_estudiante,
     verificar_disponibilidad,

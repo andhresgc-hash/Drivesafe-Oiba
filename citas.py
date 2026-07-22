@@ -68,16 +68,6 @@ def programar_cita(cedula_estudiante, fecha, hora, duracion_horas, cedula_instru
     guardar_datos(ARCHIVO_CITAS, citas)
     return id_cita
 
-def obtener_citas_instructor(cedula_instructor):
-    todas_las_citas = cargar_datos(ARCHIVO_CITAS)
-    citas_del_instructor = []
-    
-    for id_cita, datos_cita in todas_las_citas.items():
-        if datos_cita['cedula_instructor'] == cedula_instructor:
-            citas_del_instructor.append(datos_cita)
-            
-    return citas_del_instructor
-
 def confirmar_clase(id_cita, observacion=""):
     citas = cargar_datos(ARCHIVO_CITAS)
     

@@ -18,8 +18,7 @@ A continuación, se detalla la función de cada archivo que compone el sistema:
 
 ## Requisitos del Sistema
 
-*   Tener instalado Python 3 en el equipo.
-*   No requiere la instalación de librerías adicionales ni dependencias externas.
+*   Tener instalado Python en el equipo.
 
 ---
 
