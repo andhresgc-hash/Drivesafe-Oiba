@@ -1,0 +1,35 @@
+{
+    "2e6e05": {
+        "id_cita": "2e6e05",
+        "cedula_estudiante": "98",
+        "fecha": "19-07-2026",
+        "hora": "16:00",
+        "duracion": 2,
+        "cedula_instructor": "19",
+        "placa_vehiculo": "WQS888",
+        "asistencia": "Completada",
+        "observaciones": "El estudiante se estrello contra espa\u00f1a"
+    },
+    "d27c42": {
+        "id_cita": "d27c42",
+        "cedula_estudiante": "98",
+        "fecha": "21-07-2026",
+        "hora": "15:00",
+        "duracion": 2,
+        "cedula_instructor": "19",
+        "placa_vehiculo": "WQS888",
+        "asistencia": "Completada",
+        "observaciones": "El estudiante es una mula"
+    },
+    "d33f8d": {
+        "id_cita": "d33f8d",
+        "cedula_estudiante": "98",
+        "fecha": "20-07-2027",
+        "hora": "14:00",
+        "duracion": 19,
+        "cedula_instructor": "19",
+        "placa_vehiculo": "WQS888",
+        "asistencia": null,
+        "observaciones": ""
+    }
+}
