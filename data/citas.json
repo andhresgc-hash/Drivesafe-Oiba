@@ -1,1 +1,13 @@
-{}
+{
+    "b64162": {
+        "id_cita": "b64162",
+        "cedula_estudiante": 1,
+        "fecha": "20-07-2026",
+        "hora": "12:00",
+        "duracion": 2,
+        "cedula_instructor": "1",
+        "placa_vehiculo": "ABC-123",
+        "asistencia": null,
+        "observaciones": ""
+    }
+}

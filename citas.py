@@ -6,7 +6,7 @@ ARCHIVO_USUARIOS = 'data/usuarios.json'
 ARCHIVO_VEHICULOS = 'data/vehiculos.json'
 from datetime import datetime, timedelta
 
-def verificar_disponibilidad(fecha, hora_inicio, duracion_horas, nombre_instructor, placa_vehiculo):
+def verificar_disponibilidad(fecha, hora_inicio, duracion_horas, cedula_instructor, placa_vehiculo):
     citas = cargar_datos(ARCHIVO_CITAS)
 
     formato = "%d-%m-%Y %H:%M"
@@ -19,7 +19,7 @@ def verificar_disponibilidad(fecha, hora_inicio, duracion_horas, nombre_instruct
 
     for id_cita, cita in citas.items():
         if cita['asistencia'] != "Completada":
-            if cita['nombre_instructor'].lower() == nombre_instructor.lower() or cita['placa_vehiculo'] == placa_vehiculo.lower():
+            if str(cita['cedula_instructor']) == str(cedula_instructor) or cita['placa_vehiculo'].lower() == placa_vehiculo.lower():
                 inicio_guardado = datetime.strptime(f"{cita['fecha']} {cita['hora']}", formato)
                 horas = cita.get('duracion', 1) 
                 fin_guardado = inicio_guardado + timedelta(hours=horas)

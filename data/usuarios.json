@@ -1,10 +1,18 @@
 {
     "estudiantes": {
-        "54": {
-            "nombre": "polopolo",
-            "cedula": 54,
-            "edad": 54,
-            "detalle": "moto"
+        "1": {
+            "nombre": "estudiante1",
+            "cedula": 1,
+            "edad": 1,
+            "detalle": "carro"
+        }
+    },
+    "instructores": {
+        "1": {
+            "nombre": "instructor1",
+            "cedula": 1,
+            "edad": 1,
+            "detalle": "carro"
         }
     }
 }

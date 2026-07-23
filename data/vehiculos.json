@@ -1,1 +1,8 @@
-{}
+{
+    "ABC-123": {
+        "placa": "ABC-123",
+        "tipo": "carro",
+        "modelo": "2020",
+        "disponible": true
+    }
+}

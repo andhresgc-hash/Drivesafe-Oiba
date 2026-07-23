@@ -20,6 +20,31 @@ def pedir_entero(mensaje):
             return valor
         except ValueError:
             print("\nERROR: Entrada inválida. Por favor digite un número válido, no letras.\n")
+
+def pedir_nombre(mensaje):
+    """Sigue pidiendo el nombre hasta que sea válido (solo letras y espacios, y no vacío)"""
+    while True:
+        nombre = input(mensaje).strip()
+        # Permitimos letras y espacios, descartamos números
+        if nombre and nombre.replace(" ", "").isalpha():
+            return nombre
+        print("\nERROR: Nombre inválido. Debe contener solo letras y espacios, y no estar vacío.\n")
+
+def pedir_edad(mensaje):
+    """Sigue pidiendo la edad hasta que sea un número entero razonable (16 a 99)"""
+    while True:
+        edad = pedir_entero(mensaje)
+        if 16 <= edad <= 99:
+            return edad
+        print("\nERROR: Edad inválida. Debe estar entre 16 y 99 años.\n")
+
+def pedir_curso(mensaje):
+    """Sigue pidiendo el tipo de curso hasta que sea exactamente 'carro' o 'moto'"""
+    while True:
+        curso = input(mensaje).strip().lower()
+        if curso in ["carro", "moto"]:
+            return curso
+        print("\nERROR: Entrada inválida. Escriba exactamente 'Carro' o 'Moto'.\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
@@ -53,10 +78,10 @@ def portal_estudiante():
             else:
                 print("Estudiante no encontrado.")
         elif opcion == "2":
-            nombre = input("Nombre: ")
+            nombre = pedir_nombre("Nombre: ")
             cedula = pedir_entero("Cédula: ")
-            edad = pedir_entero("Edad: ")
-            curso = input("Curso (Carro/Moto): ")
+            edad = pedir_edad("Edad: ")
+            curso = pedir_curso("Curso (Carro/Moto): ")
             exito = registrar_usuario("estudiantes", nombre, cedula, edad, curso)
             if exito:
                 print("Estudiante registrado exitosamente!")
@@ -162,10 +187,10 @@ def portal_instructor():
                 print("Instructor no encontrado.")
                 
         elif opcion == "2":
-            nombre = input("Nombre: ")
+            nombre = pedir_nombre("Nombre: ")
             cedula = pedir_entero("Cédula: ")
-            edad = pedir_entero("Edad: ") 
-            especialidad = input("Especialidad (Carro/Moto): ")
+            edad = pedir_edad("Edad: ") 
+            especialidad = pedir_curso("Especialidad (Carro/Moto): ")
             exito = registrar_usuario("instructores", nombre, cedula, edad, especialidad)
             if exito:
                 print("Instructor registrado exitosamente")
@@ -238,7 +263,7 @@ def menu_instructor(usuario):
         elif opcion == "3":
             print("\nRegistro de Nuevo Vehículo")
             placa = input("Ingrese la placa (Ejemplo: ABC-123): ")
-            tipo = input("Tipo de vehículo (Carro/Moto): ")
+            tipo = pedir_curso("Tipo de vehículo (Carro/Moto): ")
             modelo = input("Modelo (Año): ")
             exito = registrar_vehiculo(placa, tipo, modelo)
             if exito:
