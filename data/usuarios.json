@@ -5,6 +5,12 @@
             "cedula": 1,
             "edad": 1,
             "detalle": "carro"
+        },
+        "12": {
+            "nombre": "12345",
+            "cedula": 12,
+            "edad": 12,
+            "detalle": "12"
         }
     },
     "instructores": {

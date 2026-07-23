@@ -22,16 +22,13 @@ def pedir_entero(mensaje):
             print("\nERROR: Entrada inválida. Por favor digite un número válido, no letras.\n")
 
 def pedir_nombre(mensaje):
-    """Sigue pidiendo el nombre hasta que sea válido (solo letras y espacios, y no vacío)"""
     while True:
         nombre = input(mensaje).strip()
-        # Permitimos letras y espacios, descartamos números
         if nombre and nombre.replace(" ", "").isalpha():
             return nombre
         print("\nERROR: Nombre inválido. Debe contener solo letras y espacios, y no estar vacío.\n")
 
 def pedir_edad(mensaje):
-    """Sigue pidiendo la edad hasta que sea un número entero razonable (16 a 99)"""
     while True:
         edad = pedir_entero(mensaje)
         if 16 <= edad <= 99:
@@ -39,12 +36,19 @@ def pedir_edad(mensaje):
         print("\nERROR: Edad inválida. Debe estar entre 16 y 99 años.\n")
 
 def pedir_curso(mensaje):
-    """Sigue pidiendo el tipo de curso hasta que sea exactamente 'carro' o 'moto'"""
     while True:
         curso = input(mensaje).strip().lower()
         if curso in ["carro", "moto"]:
             return curso
         print("\nERROR: Entrada inválida. Escriba exactamente 'Carro' o 'Moto'.\n")
+
+def pedir_placa(mensaje):
+    """Sigue pidiendo la placa hasta que sea válida (alfanumérica de al menos 3 caracteres)"""
+    while True:
+        placa = input(mensaje).strip().upper()
+        if placa and len(placa) >= 3 and placa.replace("-", "").isalnum():
+            return placa
+        print("\nERROR: Placa inválida. Debe tener al menos 3 caracteres (letras y números, ej: ABC-123).\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
@@ -155,13 +159,13 @@ def menu_estudiante(usuario):
             fecha = input("Fecha (Dia-Mes-Año) (ejemplo 20-07-2026): ") 
             hora = input("Hora de inicio (ejemplo 14:00): ")
             duracion = pedir_entero("Duración de la clase (en horas): ") 
-            nombre_inst = input("Digite el Nombre del instructor elegido: ")
+            nombre_inst = pedir_nombre("Digite el Nombre del instructor elegido: ")
             id_inst = buscar_cedula_instructor_por_nombre(nombre_inst, tipo_del_estudiante)
             if id_inst is None:
                 print(f"\nNo se encontró ningún instructor llamado '{nombre_inst}' de especialidad {tipo_del_estudiante}.")
                 continue
                 
-            placa_veh = input("Digite la Placa del vehículo elegido: ").upper()
+            placa_veh = pedir_placa("Digite la Placa del vehículo elegido: ")
             print("\nVerificando disponibilidad...")
             disponible = verificar_disponibilidad(fecha, hora, duracion, id_inst, placa_veh)
             if disponible:
@@ -262,9 +266,9 @@ def menu_instructor(usuario):
 
         elif opcion == "3":
             print("\nRegistro de Nuevo Vehículo")
-            placa = input("Ingrese la placa (Ejemplo: ABC-123): ")
+            placa = pedir_placa("Ingrese la placa (Ejemplo: ABC-123): ")
             tipo = pedir_curso("Tipo de vehículo (Carro/Moto): ")
-            modelo = input("Modelo (Año): ")
+            modelo = pedir_entero("Modelo (Año): ")
             exito = registrar_vehiculo(placa, tipo, modelo)
             if exito:
                 print("Vehículo registrado exitosamente")
