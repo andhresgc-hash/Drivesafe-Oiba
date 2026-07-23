@@ -80,6 +80,22 @@ def pedir_opcion(mensaje, opciones_validas):
         if opcion in opciones_validas:
             return opcion
         print(f"\nERROR: Opción no válida. Por favor, selecciona una de las opciones: {', '.join(opciones_validas)}.\n")
+
+def pedir_cedula(mensaje):
+    """Fuerza a que la cédula sea un número entero positivo mayor a cero"""
+    while True:
+        cedula = pedir_entero(mensaje)
+        if cedula > 0:
+            return cedula
+        print("\nERROR: Cédula inválida. Debe ser un número positivo mayor a 0.\n")
+
+def pedir_modelo(mensaje):
+    """Fuerza a que el modelo del vehículo sea un año entero razonable"""
+    while True:
+        año = pedir_entero(mensaje)
+        if 1900 <= año <= 2030:
+            return año
+        print("\nERROR: Modelo (año) inválido. Debe ser un año entre 1900 y 2030.\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
@@ -112,7 +128,7 @@ def portal_estudiante():
                 print("Estudiante no encontrado.")
         elif opcion == "2":
             nombre = pedir_nombre("Nombre: ")
-            cedula = pedir_entero("Cédula: ")
+            cedula = pedir_cedula("Cédula: ")
             edad = pedir_edad("Edad: ")
             curso = pedir_curso("Curso (Carro/Moto): ")
             exito = registrar_usuario("estudiantes", nombre, cedula, edad, curso)
@@ -219,7 +235,7 @@ def portal_instructor():
                 
         elif opcion == "2":
             nombre = pedir_nombre("Nombre: ")
-            cedula = pedir_entero("Cédula: ")
+            cedula = pedir_cedula("Cédula: ")
             edad = pedir_edad("Edad: ") 
             especialidad = pedir_curso("Especialidad (Carro/Moto): ")
             exito = registrar_usuario("instructores", nombre, cedula, edad, especialidad)
@@ -290,7 +306,7 @@ def menu_instructor(usuario):
             print("\nRegistro de Nuevo Vehículo")
             placa = pedir_placa("Ingrese la placa (Ejemplo: ABC-123): ")
             tipo = pedir_curso("Tipo de vehículo (Carro/Moto): ")
-            modelo = pedir_entero("Modelo (Año): ")
+            modelo = pedir_modelo("Modelo (Año): ")
             exito = registrar_vehiculo(placa, tipo, modelo)
             if exito:
                 print("Vehículo registrado exitosamente")
