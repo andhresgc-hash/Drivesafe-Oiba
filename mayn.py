@@ -48,7 +48,6 @@ def pedir_curso(mensaje):
 def pedir_placa(mensaje):
     while True:
         placa = input(mensaje).strip().upper()
-        # Valida exactamente 3 letras, opcional guion, y 3 números (ej: ABC-123 o ABC123)
         if re.match(r"^[A-Z]{3}-?[0-9]{3}$", placa):
             return placa
         print("\nERROR: Placa inválida. Debe tener exactamente 3 letras seguidas de 3 números (ejemplo: ABC-123 o ABC123).\n")
@@ -56,7 +55,6 @@ def pedir_placa(mensaje):
 def pedir_cedula(mensaje):
     while True:
         cedula = pedir_entero(mensaje)
-        # Debe tener entre 6 y 10 dígitos
         if 100000 <= cedula <= 9999999999:
             return cedula
         print("\nERROR: Cédula inválida. Debe tener entre 6 y 10 dígitos.\n")
