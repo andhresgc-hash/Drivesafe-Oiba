@@ -82,7 +82,7 @@ def obtener_citas_pendientes_instructor(cedula_instructor):
     todas = cargar_datos(ARCHIVO_CITAS)
     pendientes = []
     for id_cita, datos in todas.items():
-        if datos['cedula_instructor'] == cedula_instructor and datos['asistencia'] == None:
+        if str(datos['cedula_instructor']) == str(cedula_instructor) and datos['asistencia'] == None:
             pendientes.append(datos)
     return pendientes
 
@@ -90,7 +90,7 @@ def obtener_historial_instructor(cedula_instructor):
     todas = cargar_datos(ARCHIVO_CITAS)
     historial = []
     for id_cita, datos in todas.items():
-        if datos['cedula_instructor'] == cedula_instructor and datos['asistencia'] == "Completada":
+        if str(datos['cedula_instructor']) == str(cedula_instructor) and datos['asistencia'] == "Completada":
             historial.append(datos)
     return historial
 
@@ -98,7 +98,7 @@ def obtener_citas_pendientes_estudiante(cedula_estudiante):
     todas = cargar_datos(ARCHIVO_CITAS)
     pendientes = []
     for id_cita, datos in todas.items():
-        if datos['cedula_estudiante'] == cedula_estudiante and datos['asistencia'] == None:
+        if str(datos['cedula_estudiante']) == str(cedula_estudiante) and datos['asistencia'] == None:
             pendientes.append(datos)
     return pendientes
 
@@ -106,7 +106,7 @@ def obtener_historial_estudiante(cedula_estudiante):
     todas = cargar_datos(ARCHIVO_CITAS)
     historial = []
     for id_cita, datos in todas.items():
-        if datos['cedula_estudiante'] == cedula_estudiante and datos['asistencia'] == "Completada":
+        if str(datos['cedula_estudiante']) == str(cedula_estudiante) and datos['asistencia'] == "Completada":
             historial.append(datos)
     return historial
 
@@ -116,13 +116,14 @@ def buscar_cedula_instructor_por_nombre(nombre_buscar, tipo_curso):
         for cedula, inst in datos['instructores'].items():
             if (inst['nombre'].lower() == nombre_buscar.lower() and 
                 inst['detalle'].lower() == tipo_curso.lower()):
-                return cedula
+                return str(cedula)
     return None
 
 def obtener_nombre_usuario(rol, cedula):
     datos = cargar_datos(ARCHIVO_USUARIOS)
-    if rol in datos and cedula in datos[rol]:
-        return datos[rol][cedula]['nombre']
+    cedula_str = str(cedula)
+    if rol in datos and cedula_str in datos[rol]:
+        return datos[rol][cedula_str]['nombre']
     return "Desconocido"
 
 def obtener_citas_pendientes_instructor_por_fecha(cedula_instructor, fecha):
@@ -130,7 +131,7 @@ def obtener_citas_pendientes_instructor_por_fecha(cedula_instructor, fecha):
     filtradas = []
     
     for id_cita, datos in todas.items():
-        if (datos['cedula_instructor'] == cedula_instructor and 
+        if (str(datos['cedula_instructor']) == str(cedula_instructor) and 
             datos['asistencia'] == None and 
             datos['fecha'] == fecha):
             filtradas.append(datos)

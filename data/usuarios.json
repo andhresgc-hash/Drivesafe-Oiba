@@ -5,6 +5,12 @@
             "cedula": 1,
             "edad": 50,
             "detalle": "carro"
+        },
+        "2": {
+            "nombre": "estudiante",
+            "cedula": 2,
+            "edad": 45,
+            "detalle": "carro"
         }
     },
     "instructores": {
