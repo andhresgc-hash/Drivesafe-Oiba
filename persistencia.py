@@ -4,8 +4,11 @@ import os
 def cargar_datos(archivo):
     if not os.path.exists(archivo):
         return {}
-    with open(archivo, 'r') as f:
-        return json.load(f)
+    try:
+        with open(archivo, 'r') as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        return {}
 def guardar_datos(archivo, datos):
     carpeta = os.path.dirname(archivo)
     if carpeta and not os.path.exists(carpeta):

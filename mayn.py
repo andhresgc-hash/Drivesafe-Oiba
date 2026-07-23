@@ -1,3 +1,4 @@
+from datetime import datetime
 from vehiculos import registrar_vehiculo
 from usuarios import registrar_usuario, iniciar_sesion
 from citas import (
@@ -49,6 +50,28 @@ def pedir_placa(mensaje):
         if placa and len(placa) >= 3 and placa.replace("-", "").isalnum():
             return placa
         print("\nERROR: Placa inválida. Debe tener al menos 3 caracteres (letras y números, ej: ABC-123).\n")
+
+def pedir_fecha(mensaje):
+    """Fuerza al usuario a digitar una fecha válida en formato DD-MM-AAAA"""
+    while True:
+        fecha_str = input(mensaje).strip()
+        try:
+            # Validamos con el formato Día-Mes-Año
+            datetime.strptime(fecha_str, "%d-%m-%Y")
+            return fecha_str
+        except ValueError:
+            print("\nERROR: Fecha inválida. Use el formato DD-MM-AAAA (ejemplo: 20-07-2026).\n")
+
+def pedir_hora(mensaje):
+    """Fuerza al usuario a digitar una hora válida en formato HH:MM (24 horas)"""
+    while True:
+        hora_str = input(mensaje).strip()
+        try:
+            # Validamos con el formato Hora:Minuto
+            datetime.strptime(hora_str, "%H:%M")
+            return hora_str
+        except ValueError:
+            print("\nERROR: Hora inválida. Use el formato HH:MM en rango 24 horas (ejemplo: 14:00).\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
@@ -155,9 +178,9 @@ def menu_estudiante(usuario):
             print("\nVehículos Disponibles:")
             for placa, veh in vehiculos.items():
                 print(f"- {veh['tipo']} {veh['modelo']} | Placa: {placa}")
-            print("\nDigite los datos para su clase")
-            fecha = input("Fecha (Dia-Mes-Año) (ejemplo 20-07-2026): ") 
-            hora = input("Hora de inicio (ejemplo 14:00): ")
+            print("\n-- Digite los datos para su clase --")
+            fecha = pedir_fecha("Fecha (Día-Mes-Año) (ejemplo 20-07-2026): ") 
+            hora = pedir_hora("Hora de inicio (ejemplo 14:00): ")
             duracion = pedir_entero("Duración de la clase (en horas): ") 
             nombre_inst = pedir_nombre("Digite el Nombre del instructor elegido: ")
             id_inst = buscar_cedula_instructor_por_nombre(nombre_inst, tipo_del_estudiante)
@@ -231,7 +254,7 @@ def menu_instructor(usuario):
             if subopcion == "1":
                 mis_citas = obtener_citas_pendientes_instructor(usuario['cedula'])
             elif subopcion == "2":
-                fecha_buscar = input("Ingresa la fecha a buscar (Dia-Mes-Año): ")
+                fecha_buscar = pedir_fecha("Ingresa la fecha a buscar (Día-Mes-Año): ")
                 mis_citas = obtener_citas_pendientes_instructor_por_fecha(usuario['cedula'], fecha_buscar)
             elif subopcion == "0":
                 continue

@@ -1,23 +1,17 @@
 {
     "estudiantes": {
         "1": {
-            "nombre": "estudiante1",
+            "nombre": "erick",
             "cedula": 1,
-            "edad": 1,
+            "edad": 50,
             "detalle": "carro"
-        },
-        "12": {
-            "nombre": "12345",
-            "cedula": 12,
-            "edad": 12,
-            "detalle": "12"
         }
     },
     "instructores": {
-        "1": {
-            "nombre": "instructor1",
-            "cedula": 1,
-            "edad": 1,
+        "2": {
+            "nombre": "david",
+            "cedula": 2,
+            "edad": 54,
             "detalle": "carro"
         }
     }

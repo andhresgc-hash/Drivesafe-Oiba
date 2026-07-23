@@ -9,5 +9,16 @@
         "placa_vehiculo": "ABC-123",
         "asistencia": null,
         "observaciones": ""
+    },
+    "ed5b92": {
+        "id_cita": "ed5b92",
+        "cedula_estudiante": 1,
+        "fecha": "20-07-2026",
+        "hora": "12:00",
+        "duracion": 2,
+        "cedula_instructor": "2",
+        "placa_vehiculo": "ABC123",
+        "asistencia": null,
+        "observaciones": ""
     }
 }
