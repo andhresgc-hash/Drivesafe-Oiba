@@ -1,5 +1,5 @@
 from persistencia import cargar_datos, guardar_datos
-import uuid 
+import uuid
 
 ARCHIVO_CITAS = 'data/citas.json'
 ARCHIVO_USUARIOS = 'data/usuarios.json'
