@@ -72,13 +72,21 @@ def pedir_hora(mensaje):
             return hora_str
         except ValueError:
             print("\nERROR: Hora inválida. Use el formato HH:MM en rango 24 horas (ejemplo: 14:00).\n")
+
+def pedir_opcion(mensaje, opciones_validas):
+    """Sigue pidiendo una opción hasta que el usuario digite una opción permitida"""
+    while True:
+        opcion = input(mensaje).strip()
+        if opcion in opciones_validas:
+            return opcion
+        print(f"\nERROR: Opción no válida. Por favor, selecciona una de las opciones: {', '.join(opciones_validas)}.\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
         print("1. Ingresar como Estudiante")
         print("2. Ingresar como Instructor")
         print("0. Salir de DriveSafe Oiba")
-        opcion = input("Elige una opción: ")
+        opcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
         if opcion == "1":
             portal_estudiante()
         elif opcion == "2":
@@ -86,8 +94,6 @@ def main():
         elif opcion == "0":
             print("¡Gracias por usar DriveSafe, bay bay!")
             break
-        else:
-            print("Opción no válida, por favor, selecciona 1, 2 o 0.")
 
 def portal_estudiante():
     while True:
@@ -96,7 +102,7 @@ def portal_estudiante():
         print("2. Registrarse")
         print("0. Volver")
         
-        opcion = input("Elige una opción: ")
+        opcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
         if opcion == "1":
             cedula = input("Cédula: ")
             usuario = iniciar_sesion("estudiantes", cedula)
@@ -117,8 +123,6 @@ def portal_estudiante():
                 
         elif opcion == "0":
             break
-        else:
-            print("Opción no válida.")
 
 def menu_estudiante(usuario):
     while True:
@@ -127,7 +131,7 @@ def menu_estudiante(usuario):
         print("2. Asistencias")
         print("3. Agendar clase")
         print("0. Cerrar sesión")
-        opcion = input("Elige una opción: ")
+        opcion = pedir_opcion("Elige una opción: ", ["1", "2", "3", "0"])
         if opcion == "0":
             break
         elif opcion == "1":
@@ -204,7 +208,7 @@ def portal_instructor():
         print("2. Registrarse")
         print("0. Volver pa atras")
         
-        opcion = input("Elige una opción: ")
+        opcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
         if opcion == "1":
             cedula = input("Cédula: ")
             usuario = iniciar_sesion("instructores", cedula)
@@ -226,8 +230,6 @@ def portal_instructor():
                 
         elif opcion == "0":
             break
-        else:
-            print("Opción no válida.")
 
 def menu_instructor(usuario):
     while True:
@@ -237,7 +239,7 @@ def menu_instructor(usuario):
         print("3. Registrar un vehículo")
         print("0. Cerrar sesión")
         
-        opcion = input("Elige una opción: ")
+        opcion = pedir_opcion("Elige una opción: ", ["1", "2", "3", "0"])
         
         if opcion == "0":
             break
@@ -248,7 +250,7 @@ def menu_instructor(usuario):
             print("2. Filtrar clases por fecha")
             print("0. Volver")
             
-            subopcion = input("Elige una opción: ")
+            subopcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
             
             mis_citas = []
             if subopcion == "1":
@@ -257,9 +259,6 @@ def menu_instructor(usuario):
                 fecha_buscar = pedir_fecha("Ingresa la fecha a buscar (Día-Mes-Año): ")
                 mis_citas = obtener_citas_pendientes_instructor_por_fecha(usuario['cedula'], fecha_buscar)
             elif subopcion == "0":
-                continue
-            else:
-                print("Opción no válida.")
                 continue
             if len(mis_citas) == 0:
                 print("\nNo se encontraron clases programadas.")

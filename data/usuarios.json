@@ -11,6 +11,12 @@
             "cedula": 2,
             "edad": 45,
             "detalle": "carro"
+        },
+        "989": {
+            "nombre": "kiara",
+            "cedula": 989,
+            "edad": 95,
+            "detalle": "carro"
         }
     },
     "instructores": {
