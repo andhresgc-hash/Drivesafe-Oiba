@@ -70,7 +70,6 @@ def programar_cita(cedula_estudiante, fecha, hora, duracion_horas, cedula_instru
 
 def confirmar_clase(id_cita, observacion=""):
     citas = cargar_datos(ARCHIVO_CITAS)
-    
     if id_cita in citas:
         citas[id_cita]['asistencia'] = "Completada"
         citas[id_cita]['observaciones'] = observacion

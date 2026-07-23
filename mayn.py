@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 from vehiculos import registrar_vehiculo
 from usuarios import registrar_usuario, iniciar_sesion
 from citas import (
@@ -14,6 +15,7 @@ from citas import (
     obtener_citas_pendientes_instructor_por_fecha,
     buscar_cedula_instructor_por_nombre,
     obtener_nombre_usuario)
+
 def pedir_entero(mensaje):
     while True:
         try:
@@ -32,9 +34,9 @@ def pedir_nombre(mensaje):
 def pedir_edad(mensaje):
     while True:
         edad = pedir_entero(mensaje)
-        if 16 <= edad <= 99:
+        if 16 <= edad <= 90:
             return edad
-        print("\nERROR: Edad inválida. Debe estar entre 16 y 99 años.\n")
+        print("\nERROR: Edad inválida. Debe estar entre 16 y 90 años.\n")
 
 def pedir_curso(mensaje):
     while True:
@@ -44,58 +46,53 @@ def pedir_curso(mensaje):
         print("\nERROR: Entrada inválida. Escriba exactamente 'Carro' o 'Moto'.\n")
 
 def pedir_placa(mensaje):
-    """Sigue pidiendo la placa hasta que sea válida (alfanumérica de al menos 3 caracteres)"""
     while True:
         placa = input(mensaje).strip().upper()
-        if placa and len(placa) >= 3 and placa.replace("-", "").isalnum():
+        # Valida exactamente 3 letras, opcional guion, y 3 números (ej: ABC-123 o ABC123)
+        if re.match(r"^[A-Z]{3}-?[0-9]{3}$", placa):
             return placa
-        print("\nERROR: Placa inválida. Debe tener al menos 3 caracteres (letras y números, ej: ABC-123).\n")
+        print("\nERROR: Placa inválida. Debe tener exactamente 3 letras seguidas de 3 números (ejemplo: ABC-123 o ABC123).\n")
+
+def pedir_cedula(mensaje):
+    while True:
+        cedula = pedir_entero(mensaje)
+        # Debe tener entre 6 y 10 dígitos
+        if 100000 <= cedula <= 9999999999:
+            return cedula
+        print("\nERROR: Cédula inválida. Debe tener entre 6 y 10 dígitos.\n")
+
+def pedir_modelo(mensaje):
+    while True:
+        año = pedir_entero(mensaje)
+        if 1900 <= año <= 2030:
+            return año
+        print("\nERROR: Modelo (año) inválido. Debe ser un año entre 1900 y 2030.\n")
 
 def pedir_fecha(mensaje):
-    """Fuerza al usuario a digitar una fecha válida en formato DD-MM-AAAA"""
     while True:
         fecha_str = input(mensaje).strip()
         try:
-            # Validamos con el formato Día-Mes-Año
             datetime.strptime(fecha_str, "%d-%m-%Y")
             return fecha_str
         except ValueError:
             print("\nERROR: Fecha inválida. Use el formato DD-MM-AAAA (ejemplo: 20-07-2026).\n")
 
 def pedir_hora(mensaje):
-    """Fuerza al usuario a digitar una hora válida en formato HH:MM (24 horas)"""
     while True:
         hora_str = input(mensaje).strip()
         try:
-            # Validamos con el formato Hora:Minuto
             datetime.strptime(hora_str, "%H:%M")
             return hora_str
         except ValueError:
             print("\nERROR: Hora inválida. Use el formato HH:MM en rango 24 horas (ejemplo: 14:00).\n")
 
 def pedir_opcion(mensaje, opciones_validas):
-    """Sigue pidiendo una opción hasta que el usuario digite una opción permitida"""
     while True:
         opcion = input(mensaje).strip()
         if opcion in opciones_validas:
             return opcion
         print(f"\nERROR: Opción no válida. Por favor, selecciona una de las opciones: {', '.join(opciones_validas)}.\n")
 
-def pedir_cedula(mensaje):
-    """Fuerza a que la cédula sea un número entero positivo mayor a cero"""
-    while True:
-        cedula = pedir_entero(mensaje)
-        if cedula > 0:
-            return cedula
-        print("\nERROR: Cédula inválida. Debe ser un número positivo mayor a 0.\n")
-
-def pedir_modelo(mensaje):
-    """Fuerza a que el modelo del vehículo sea un año entero razonable"""
-    while True:
-        año = pedir_entero(mensaje)
-        if 1900 <= año <= 2030:
-            return año
-        print("\nERROR: Modelo (año) inválido. Debe ser un año entre 1900 y 2030.\n")
 def main():
     while True:
         print("\nBIENVENIDO A DRIVESAFE OIBA")
@@ -120,7 +117,7 @@ def portal_estudiante():
         
         opcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
         if opcion == "1":
-            cedula = input("Cédula: ")
+            cedula = input("Cédula: ").strip()
             usuario = iniciar_sesion("estudiantes", cedula)
             if usuario:
                 menu_estudiante(usuario)
@@ -226,7 +223,7 @@ def portal_instructor():
         
         opcion = pedir_opcion("Elige una opción: ", ["1", "2", "0"])
         if opcion == "1":
-            cedula = input("Cédula: ")
+            cedula = input("Cédula: ").strip()
             usuario = iniciar_sesion("instructores", cedula)
             if usuario:
                 menu_instructor(usuario)
@@ -315,4 +312,6 @@ def menu_instructor(usuario):
                     
         else:
             print("Opción no válida.")
-main()
+
+if __name__ == "__main__":
+    main()

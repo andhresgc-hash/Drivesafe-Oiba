@@ -1,1 +1,30 @@
-{}
+{
+    "estudiantes": {
+        "999": {
+            "nombre": "pablito",
+            "cedula": 999,
+            "edad": 55,
+            "detalle": "carro"
+        },
+        "94984": {
+            "nombre": "julian",
+            "cedula": 94984,
+            "edad": 98,
+            "detalle": "moto"
+        },
+        "123123": {
+            "nombre": "larry",
+            "cedula": 123123,
+            "edad": 19,
+            "detalle": "moto"
+        }
+    },
+    "instructores": {
+        "555": {
+            "nombre": "polopolo",
+            "cedula": 555,
+            "edad": 55,
+            "detalle": "carro"
+        }
+    }
+}
